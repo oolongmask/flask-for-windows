@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/sub_main.css">
+    <title>ご予約</title>
+    <link rel="icon" href="static/img/favicon.png" sizes="16*16">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+</head>
+<body>
+    <div class="all-box">
+        <a href="{{ url_for('index') }}">Home</a>
+    <div class="calendar-container">
+　　　　<h4>予約フォーム</h4>
+        <div class="calendar-header">
+            <button id="prevMonth">◀</button>
+            <div class="calendar-month" id="currentMonth"></div>
+            <button id="nextMonth">▶</button>
+        </div>
+<div class="calendar-days" id="calendarDays"></div>
+    </div>
+
+    <!-- 予約フォーム -->
+     
+    <div id="reservation-form" style="display: none;">
+        <h3>
+        <p>選択した日付: <span id="selected-date"></span></p></h3>
+        <form id="reservation-details">
+            <label>
+                メールアドレス:
+                <input type="email" id="email" required>
+            </label>
+            <div class="time-slots">
+                
+                <label>
+                    <input type="radio" name="time-slot" value="10:00-11:00"> 10:00-11:00
+                </label>
+                <label>
+                    <input type="radio" name="time-slot" value="11:00-12:00"> 11:00-12:00
+                </label>
+                <label>
+                    <input type="radio" name="time-slot" value="12:00-13:00"> 12:00-13:00
+                </label>
+                <label>
+                    <input type="radio" name="time-slot" value="13:00-14:00"> 13:00-14:00
+                </label>
+               
+                <label>
+                    <input type="radio" name="time-slot" value="14:00-15:00"> 14:00-15:00
+                </label>
+                <label>
+                    <input type="radio" name="time-slot" value="15:00-16:00"> 15:00-16:00
+                </label>
+                <label>
+                    <input type="radio" name="time-slot" value="16:00-17:00"> 15:00-16:00
+                </label>
+                <label>
+                    <input type="radio" name="time-slot" value="17:00-18:00"> 17:00-18:00
+                </label>
+                
+            
+            <div class="button-container">
+            <button type="button" id="confirm-reservation" onclick="sendEmail()">決定</button>
+
+           </div>
+            
+        </form>
+        <div id="reservation-status" style="display: none;"></div>
+    </div>
+</div>
+    <script>
+        function sendEmail() {
+            var email = document.getElementById('email').value;
+            var message = 'Hello, this is a test email!';
+            Email.send({
+                Host: 'smtp.gmail.com',
+                Username: 'your_email@gmail.com',
+                Password: 'your_email_password',
+                To: email,
+                From: 'your_email@gmail.com',
+                Subject: 'Test Email',
+                Body: message
+            }).then(function(response) {
+                alert('Email sent successfully!');
+            }).catch(function(error) {
+                alert('Email sending failed: ' + error);
+            });
+            }
+
+        var button = document.getElementById('confirm-reservation');
+                    button.addEventListener('click', sendEmail);
+        
+        const calendarDays = document.getElementById('calendarDays');
+        const currentMonthElement = document.getElementById('currentMonth');
+        const prevMonthButton = document.getElementById('prevMonth');
+        const nextMonthButton = document.getElementById('nextMonth');
+        let currentDate = new Date();
+
+        function renderCalendar() {
+            const currentMonth = currentDate.getMonth();
+            const currentYear = currentDate.getFullYear();
+
+            currentMonthElement.textContent = `${currentYear}年 ${currentMonth + 1}月`;
+
+            // Clear previous calendar
+            calendarDays.innerHTML = '';
+
+            // Calculate the first day of the month
+            const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+            const startingDay = firstDayOfMonth.getDay();
+
+            // Calculate the number of days in the month
+            const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
+            const totalDays = lastDayOfMonth.getDate();
+
+            // 曜日の配列
+            const dayOfWeekNames = ['日', '月', '火', '水', '木', '金', '土'];
+
+            // Create a div for each day of the week
+            for (let i = 0; i < dayOfWeekNames.length; i++) {
+            const dayOfWeekElement = document.createElement('div');
+            dayOfWeekElement.classList.add('day-of-week');
+            dayOfWeekElement.textContent = dayOfWeekNames[i];
+            calendarDays.appendChild(dayOfWeekElement);
+            }
+            for (let i = 0; i < startingDay; i++) {
+        const emptyDay = document.createElement('div');
+        emptyDay.classList.add('calendar-day');
+        calendarDays.appendChild(emptyDay);
+    }
+    for (let day = 1; day <= totalDays; day++) {
+        const calendarDay = document.createElement('div');
+        calendarDay.classList.add('calendar-day');
+
+        // Add color for Saturday and Sunday
+        const date = new Date(currentYear, currentMonth, day);
+        if (date.getDay() === 0) { // Sunday
+            calendarDay.style.color = 'red';
+        } else if (date.getDay() === 6) { // Saturday
+            calendarDay.style.color = 'blue';
+        }
+
+        calendarDay.textContent = day;
+        calendarDays.appendChild(calendarDay);
+    }
+}
+
+// Initial render
+renderCalendar();
+
+// Event listeners for next and previous month buttons
+prevMonthButton.addEventListener('click', () => {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar();
+});
+
+nextMonthButton.addEventListener('click', () => {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar();
+});
+
+const confirmReservationButton = document.getElementById('confirm-reservation');
+const reservationForm = document.getElementById('reservation-form');
+const reservationDetails = document.getElementById('reservation-details');
+const reservationStatus = document.getElementById('reservation-status');
+const selectedDateElement = document.getElementById('selected-date');
+
+let selectedDate = null;
+                   // カレンダーの日付をクリックしたときの処理
+        calendarDays.addEventListener('click', (e) => {
+            if (e.target.classList.contains('calendar-day')) {
+                selectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), parseInt(e.target.textContent));
+                selectedDateElement.textContent = selectedDate.toLocaleDateString();
+                reservationForm.style.display = 'block';
+            }
+        });
+
+        // 予約決定ボタンがクリックされたときの処理
+        confirmReservationButton.addEventListener('click', () => {
+            const selectedTimeSlot = document.querySelector('input[name="time-slot"]:checked');
+            if (!selectedTimeSlot) {
+                alert('時間帯を選択してください。');
+                return;
+            }
+
+            const reservationData = {
+                date: selectedDate.toLocaleDateString(),
+                timeSlot: selectedTimeSlot.value
+            };
+
+            // サーバーに予約情報を送信
+            fetch('reservation.php', {
+                method: 'POST',
+                body: JSON.stringify(reservationData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    reservationStatus.textContent = 'ご予約受付けました。';
+                    reservationDetails.style.display = 'none';
+                    reservationStatus.style.display = 'block';
+                } else {
+                    reservationStatus.textContent = '予約の送信に失敗しました。';
+                    reservationStatus.style.color = 'red';
+                    reservationStatus.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

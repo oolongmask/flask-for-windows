@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>site_create</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="static/img/favicon.png" sizes="16*16">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="E.S.T.E.">
+    <meta property="og:description" content="当エステサロンのホームページでは、癒しと美を追求した上質なエステ体験を提供しています。厳選されたプロのエステティシャンが、最先端のテクニックと高品質な製品を使用し、お客様の美と健康をサポートします。">
+    <meta property="og:url" content="">
+    <meta property="og:site_name" content="E.S.T.E.">
+    <meta property="article:publisher" content="">
+    <meta property="og:image" content="">
+    <link rel="stylesheet" href="static/mini.css">
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+　　  </head>
+
+  <body>
+    <header id="header">
+      <div class="inner wrapper">
+        <h1 class="logo">
+          <a href="smart.html"><img src="static/img/logo.png" alt="Ethtetic-salon"></a>
+        </h1>
+        <nav>
+          <ul>
+            <li><a href="#news">お知らせ</a></li>
+            <li><a href="#about">コース料金</a></li>
+            <li><a href="#item">取扱商品</a></li>
+            <li><a href="#company">店舗情報</a></li>
+          </ul>
+        </nav>
+      </div>
+      <a class="contact" href="{{ url_for('calender') }}">ご予約</a>
+    </header>
+      <div id="mainvisual">
+        <img src="static/img/mainvisual.jpg" alt="">
+      </div>
+
+            <h2 id="info" class="section-title">お知らせ</h2>
+            <script type="text/javascript" charset="utf-8">
+              var socket = io.connect(
+                "http://" + document.domain + ":" + location.port
+              );
+              socket.on("new info", function (msg) {
+                $("#info").append("<p>" + msg.data + "</p>");
+              });
+            </script>
+          </section>
+       
+
+      <section id="about">
+　　　　<h2 class="section-title">コース料金</h2>
+        <div class="boxside">
+       
+        <div class="wrap">
+    <label for="label1">▼ 2Bバイオトリートメント</label>
+    <input type="checkbox" id="label1" class="switch" />
+    <div class="content">
+      <div class="img">
+          <img src="static/img/about1.jpg" alt="">
+        </div>
+      <p>
+        2種のミネラルと5種の天然植物を皮膚の中に浸透させることにより、血行とリンパの流れを促進させ、個々の肌細胞が活き活きと活動を始める交換速度が非常に高まり、細胞レベルで肌を若返らせます。</p>
+      </p>
+　　　 <div>&emsp;料金...\10,000-</div>
+    </div>
+  </div>
+     
+
+       <div class="wrap">
+    <label for="label2">▼ アンチエージングエステ</label>
+    <input type="checkbox" id="label2" class="switch" />
+    <!-- ↓↓最初隠したいコンテンツ↓↓ -->
+    <div class="content">
+      <div class="img">
+          <img src="static/img/about2.jpg" alt="">
+        </div>
+      <p>
+        老化現象を遅くするためのエステティックの一種であり、加齢や老化による肌のたるみ、シワ、くすみ、乾燥などの問題を改善することを目的としています。フェイシャルエステやボディエステなどの施術を組み合わせて行われることが多く...</p>
+      </p>
+　　　 <div>&emsp;料金...\10,000-</div>
+    </div>
+    <!-- ↑↑最初隠したいコンテンツ ↑↑-->
+  </div>
+        </div>
+
+       <div class="wrap">
+    <label for="label3">▼ ダイエットボディエステ</label>
+    <input type="checkbox" id="label3" class="switch" />
+    <!-- ↓↓最初隠したいコンテンツ↓↓ -->
+    <div class="content">
+      <div class="img">
+          <img src="static/img/about3.jpg" alt="">
+        </div>
+      <p>
+        ボディエステの柔軟代謝であり、体重を減らすことよりも、基礎を上げることで体の脂肪を燃焼しやすくすることを目的としています。機器を使用して、脂肪燃焼を促進する効果があります。また、ダイエットボディエステには、セルライトケア...</p>
+      </p>
+　　　 <div>&emsp;料金...\10,000-</div>
+    </div>
+    <!-- ↑↑最初隠したいコンテンツ ↑↑-->
+  </div>
+        </div>
+
+        <div class="wrap">
+    <label for="label4">▼ 水素フェイシャルエステ</label>
+    <input type="checkbox" id="label4" class="switch" />
+    <!-- ↓↓最初隠したいコンテンツ↓↓ -->
+    <div class="content">
+      <div class="img">
+          <img src="static/img/about4.jpg" alt="">
+        </div>
+      <p>
+        高濃度の水素水を使用して、トルネード水流によって肌の角質やじっくりな汚れを吸引しながら、直接肌と毛穴の洗浄を行うエステティックの種類です。は、肌の保湿効果や美白効果、抗酸化作用などがあり、肌のハリや弾力を回復する効果が...</p>
+      </p>
+　　　 <div>&emsp;料金...\10,000-</div>
+    </div>
+    <!-- ↑↑最初隠したいコンテンツ ↑↑-->
+  </div>
+      </div>
+      </section>
+　　　　
+
+　　　<section id="item" class="wrapper">
+          <h2 class="section-title">取扱商品</h2>
+        <div class="boxset">
+        <div class="product-list">
+            <a href="templates/item1.html">
+              <img src="static/img/item1.jpg" alt="">
+              <span class="ja">商品①</span>
+              <p>税込9,000円</p>
+            </a>
+          </div>
+
+          <div class="product-list">
+            <a href="templates/item2.html">
+              <img src="static/img/item2.jpg" alt="">
+　　　　　　　<span class="ja">商品①</span>
+              <p>税込9,000円x</p>
+            </a>
+          </div>
+
+          <div class="product-list">
+            <a href="templates/item3.html">
+              <img src="static/img/item3.jpg" alt="">
+　　　　　　　<span class="ja">商品①</span>
+              <p>税込9,000円x</p>
+            </a>
+          </div>
+
+          <div class="product-list">
+            <a href="templates/item4.html">
+              <img src="static/img/item4.jpg" alt="">
+　　　　　　　<span class="ja">商品①</span>
+              <p>税込9,000円x</p>
+            </a>
+          </div>
+
+          <div class="product-list">
+            <a href="templates/item5.html">
+              <img src="static/img/item5.jpg" alt="">
+　　　　　　　<span class="ja">商品①</span>
+              <p>税込9,000円x</p>
+            </a>
+          </div>
+
+          <div class="product-list">
+            <a href="templates/item6.html">
+              <img src="static/img/item6.jpg" alt="">
+　　　　　　　<span class="ja">商品①</span>
+              <p>税込9,000円x</p>
+            </a>
+          </div>
+
+          <div class="product-list">
+            <a href="templates/item7.html">
+              <img src="static/img/item7.jpg" alt="">
+　　　　　　　<span class="ja">商品①</span>
+              <p>税込9,000円x</p>
+            </a>
+          </div>
+
+          <div class="product-list">
+            <a href="templates/item8.html">
+              <img src="static/img/item8.jpg" alt="">
+　　　　　　　<span class="ja">商品①</span>
+              <p>税込9,000円x</p>
+            </a>
+           </div>
+           </div>
+        </section>
+
+　　　　<section id="company" class="wrapper">
+      
+         <h2 class="section-title">店舗情報</h2>
+          <div class="img">
+             <img src="static/img/company.png" alt="" >
+          </div>
+          <div class="text">
+          <img src="static/img/human.jpg" alt="" >
+          <dl class="info">
+            <dt>代表</dt>
+            <dd>Dr.coco</dd>
+            <dt>店名</dt>
+            <dd>E.S.T.E.</dd>
+            <dt>所在地</dt>
+            <dd>埼玉県さいたま市見沼区</dd>
+            <dt>設立</dt>
+            <dd>2001年5月6日</dd>
+            <dt>資本金</dt>
+            <dd>3,000,000円</dd>
+            <dt>事業</dt>
+            <dd>美顔・ボディエステ</dd>
+           </dl>
+        </div>
+      </section>
+
+    <button id="scrollToTopBtn" title="ページ上部に戻る">Top</button>
+<script>
+    window.onload = function() {
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+        window.addEventListener("scroll", function() {
+            if (window.pageYOffset > 100) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        });
+
+        scrollToTopBtn.addEventListener("click", function() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    };
+</script>
+
+    <footer id="footer">
+      <div class="wrapper">
+        <p class="copyright">&copy; 2023.10 E.S.T.E. Inc.</p>
+      </div>
+    </footer>
+  </body>
+</html>
